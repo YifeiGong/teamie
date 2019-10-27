@@ -68,21 +68,16 @@ const useStyles = makeStyles(theme => ({
         <Typography variant="h5" component="h3">Poll</Typography>
         <GridList>
           <GridListTile>
-
             {
               selectedRestaurants.map( (r) => 
               <Card className={classes.card}><Typography>{r.name}</Typography></Card>
               )
             }
-          
-  
           </GridListTile>
         </GridList>
-  
-  
+   
     <Button onClick={handleClick} variant="contained" color="primary">Send out Poll</Button>
-   </div>
-      
+   </div>     
     )
   }
 
@@ -203,6 +198,7 @@ const TimeFilter = ({state}) => {
       </form>   
     )
 }
+
 const AmbienceFilter = ({setVibe}) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -217,7 +213,7 @@ const AmbienceFilter = ({setVibe}) => {
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
-    setVibe(event.target.name);
+    setVibe(event.target.value);
   };
 
   return (
@@ -232,7 +228,7 @@ const AmbienceFilter = ({setVibe}) => {
             id: 'age-simple',
           }}
         >
-          <MenuItem value={10}>Happy Hour</MenuItem>
+          <MenuItem value={"happy_hour"}>Happy Hour</MenuItem>
           <MenuItem value={20}>Good for clients</MenuItem>
           <MenuItem value={20}>Family Friendly</MenuItem>
           <MenuItem value={20}>Internal team bonding</MenuItem>
@@ -288,17 +284,20 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
     const classes = useStyles();
     const filteredRestaurants = restaurants.filter((r) => {
       let filter_or_not = false;
-      if ((budget === "") || (parseFloat(r.price) <= parseFloat(budget)))
+      if ((budget === "" && vibe === "") || (parseFloat(r.price) <= parseFloat(budget)))
       {
         filter_or_not = true;
       }
       const restaurantVibes = [r.happy_hour, r.good_for_clients, r.family_friendly, r.team_bonding];
-      if ((vibe === "") || (restaurantVibes.map(r => r === vibe).reduce((a,v) => a || v)))
+      // if ((vibe === "") || (restaurantVibes.map(r => r === vibe).reduce((a,v) => a || v)))
+      // {
+      //   filter_or_not = true;
+      // }
+      if ((vibe === "" && budget === "") || (r.vibes.includes(vibe)))
       {
+        console.log("vibe: " + vibe)
         filter_or_not = true;
       }
-      
-      
       return filter_or_not;
     }); // this will re-render because of the changes in filter attributes which are states (time, etc)
   

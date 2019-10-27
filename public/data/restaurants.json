@@ -6,7 +6,8 @@
       "type": "Korean",
       "price": 14,
       "hours": "11:00-21:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["happy_hour", "good_for_clients", "family_friendly", "team_bonding"]
     },
     {
       "id": "2",
@@ -14,7 +15,8 @@
       "type": "Japanese",
       "price": 20,
       "hours": "10:00-19:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["happy_hour", "family_friendly", "team_bonding"]
     }, 
     {
       "id": "3",
@@ -22,7 +24,8 @@
       "type": "Hot Dogs",
       "price": 10,
       "hours": "17:00-21:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["family_friendly", "team_bonding"]
     },
     {
       "id": "4",
@@ -30,7 +33,8 @@
       "type": "Japanese",
       "price": 20,
       "hours":"11:00-21:00", 
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["good_for_clients", "family_friendly", "team_bonding"]
     },
     {
       "id": "5",
@@ -38,7 +42,8 @@
       "type": "Chinese",
       "price": 13,
       "hours": "10:00-21:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["good_for_clients", "family_friendly", "team_bonding"]
     },
     {
       "id": "6",
@@ -46,7 +51,9 @@
       "type": "Pizza",
       "price": 23,
       "hours":"12:00-21:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["family_friendly", "team_bonding"]
+
     },
     {
       "id": "7",
@@ -54,7 +61,8 @@
       "type": "Chinese",
       "price": 12,
       "hours": "11:30-22:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["happy_hour", "family_friendly"]
     },
     {
       "id": "8",
@@ -62,7 +70,8 @@
       "type": "Mediterranean",
       "price": 13,
       "hours": "10:30-21:00",
-      "tables": [2, 4, 6, 10]
+      "tables": [2, 4, 6, 10],
+      "vibes": ["team_bonding"]
     }
   ]
 }

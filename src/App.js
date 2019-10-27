@@ -41,7 +41,6 @@ const App = ({}) => {
   const [restaurants, setRestaurants] = useState({restaurants: []});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
   const url = '/data/restaurants.json';
-  const filteredUrl = '/data/restaurantsFiltered.json';
 
   useEffect(() => {
     const fetchRestaurants = async () => {
