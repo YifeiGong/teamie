@@ -22,6 +22,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import Restaurant from './Restaurant';
 
 const useStyles = makeStyles(theme => ({
@@ -45,38 +51,81 @@ const useStyles = makeStyles(theme => ({
     margin: 20,
   },
   paper: {
-   // background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+    //background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
     position: "fixed",
+    width: '300px',
     padding: theme.spacing(2),
     textAlign: 'left',
     color: theme.palette.text.secondary,
     whiteSpace: 'nowrap',
-    marginTop:'200px',
+    marginTop:'20px',
     margin: theme.spacing(2),
   },
   }));
 
   const Poll = ({selectedRestaurants}) => {
+    const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
     const classes = useStyles();
     const handleClick = () => {
       const urlCode = selectedRestaurants.map(r => r.id).toString();
       window.location.href = "/voting/" + urlCode;
     }
+    const handleRemove = (selectedRestaurants) => {}
     
     return(
       <div>
         <Typography variant="h5" component="h3">Poll</Typography>
-        <GridList>
-          <GridListTile>
-            {
+        
+        {
               selectedRestaurants.map( (r) => 
-              <Card className={classes.card}><Typography>{r.name}</Typography></Card>
+              <Card className={classes.card}>
+               {r.name}
+               {r.type}
+                
+                <Chip label="Delete" clickable 
+               // color={btnColor} 
+                onClick={handleRemove}
+                />
+
+              </Card>
               )
             }
-          </GridListTile>
-        </GridList>
+            
+         
    
-    <Button onClick={handleClick} variant="contained" color="primary">Send out Poll</Button>
+  
+    <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        Invite People
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Invitate People To Vote</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            xxxxx
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClick} variant="contained" color="primary">Send out Poll</Button>
+        </DialogActions>
+      </Dialog>
    </div>     
     )
   }
@@ -101,10 +150,10 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) 
         <Grid item xs={3}>
         <AmbienceFilter setVibe={setVibe}></AmbienceFilter>
         </Grid>
-<Grid item xs={2}>
+<Grid item xs={3}>
         <TeamMemberFilter setNumPeople={setNumPeople}></TeamMemberFilter>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <BudgetFilter setBudget={setBudget}></BudgetFilter>
             </Grid> 
             
@@ -112,7 +161,7 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) 
              <DateFilter></DateFilter> 
           </Grid> */}
 
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <TimeFilter setTime={setTime}></TimeFilter>
           </Grid> 
           
@@ -169,8 +218,8 @@ const BudgetFilter = ({setBudget}) => {
     return(       
         <form class="filter">
         <TextField id="standard-with-placeholder"
-        label="We have"
-        placeholder="$ budget"
+        label="Our budegt is "
+        placeholder="$ average"
         className={classes.textField}
         margin="normal"
         onChange={(e) => setBudget(e.target.value)} id="party-budget" margin="normal"></TextField>
@@ -368,7 +417,7 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
                     <br/>
                     <Button variant="contained" color="primary">Send out Poll</Button>
                 </Grid> */}
-
+<Grid item xs={1}></Grid>
                 <Grid item xs={6}>
                     {filteredRestaurants.map(r => <Restaurant key={r.id} 
                                         restaurant={r}
@@ -377,7 +426,7 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
                                         />)}
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                 <Paper className={classes.paper}>
 
           

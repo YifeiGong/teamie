@@ -42,7 +42,6 @@ const useStyles = makeStyles(theme => ({
 const App = ({}) => {
   const [restaurants, setRestaurants] = useState({restaurants: []});
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
-  const url = '/data/restaurants.json';
 
   useEffect(() => {
     const handleData = snap => {

@@ -30,7 +30,11 @@ const Restaurant = ({key, restaurant, selectedRestaurants, setSelectedRestaurant
         <Grid item xs={8}>
      <h2>{restaurant.name}</h2>
        
-     <h5>{restaurant.price} Lunch, Dinner Available Table Sizes: {restaurant.tables.map(size => <span>{size}, </span>)}</h5>
+     <h5>Average Cost ${restaurant.price} 
+     <br></br>
+     Open Hours{restaurant.start} ~{restaurant.end} 
+     <br></br>
+     Available Table Sizes: {restaurant.tables.map(size => <span>{size}, </span>)}</h5>
      <type>{restaurant.type}</type>
      <vegan>Vegan</vegan>
      <gltfree>Gluton Free</gltfree>
