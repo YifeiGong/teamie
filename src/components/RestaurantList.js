@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     )
   }
 
-const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe}) => {
+const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) => {
   const classes = useStyles()
 
   return (
@@ -102,17 +102,18 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe}) => {
         <AmbienceFilter setVibe={setVibe}></AmbienceFilter>
         </Grid>
 <Grid item xs={2}>
-        <TeamMemberFilter state={{numPeople, setNumPeople}}></TeamMemberFilter>
+        <TeamMemberFilter setNumPeople={setNumPeople}></TeamMemberFilter>
           </Grid>
           <Grid item xs={2}>
             <BudgetFilter setBudget={setBudget}></BudgetFilter>
             </Grid> 
-            <Grid item xs={3}>
-              <DateFilter></DateFilter>
-          </Grid> 
+            
+              {/*<Grid item xs={3}>
+             <DateFilter></DateFilter> 
+          </Grid> */}
 
             <Grid item xs={2}>
-              <TimeFilter></TimeFilter>
+              <TimeFilter setTime={setTime}></TimeFilter>
           </Grid> 
           
           </Grid>
@@ -123,24 +124,44 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe}) => {
   )
 }
 
-const TeamMemberFilter = ({state}) => {
-    const classes = makeStyles(theme => ({
-      TextField: {
-        width: '20px',
-      }
+const TeamMemberFilter = ({setNumPeople}) => {
+  const classes = useStyles();
+  const [values, setValues] = React.useState({
+    age: '',
+  });
+
+  const inputLabel = React.useRef(null);
+
+
+  const handleChange = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
     }));
-  
-    return(    
-        <form class="filter">
-        <TextField
-        id="standard-with-placeholder"
-        label="Our team has"
-        placeholder="Number of members"
-        className={classes.textField}
-        margin="normal"
-        onChange={(e) => state.setNumPeople(e.target.value)} id="party-size" className={classes.textField} margin="normal"></TextField>
-        </form>
-    )
+    setNumPeople(event.target.value);
+  };
+
+  return (
+    <form className={classes.root} autoComplete="off">
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-simple">We have</InputLabel>
+        <Select
+          value={values.age}
+          onChange={handleChange}
+          inputProps={{
+            name: 'age',
+            id: 'age-simple',
+          }}
+        >
+          <MenuItem value={"small"}>Small 4~6</MenuItem>
+          <MenuItem value={"medium"}>Medium</MenuItem>
+          <MenuItem value={"large"}>Large</MenuItem>
+         
+          
+        </Select>
+      </FormControl>
+      </form>
+      )
 }
 
 const BudgetFilter = ({setBudget}) => {
@@ -156,8 +177,8 @@ const BudgetFilter = ({setBudget}) => {
         </form> 
     )
   }
-
-const TimeFilter = ({state}) => {
+ 
+const TimeFilter = ({setTime}) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     age: '',
@@ -167,13 +188,13 @@ const TimeFilter = ({state}) => {
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
+    setTime(event.target.value);
   };
   
   const inputLabel = React.useRef(null);
     const handleOnClick = (time) => {
         console.log("filtering")
         // setSelectedTime(time);
-        state.setFilterOnOff(!state.filterOnOff);
         // setFilteredRestaurants(filteredData);
     }
     // onClick={(e) => handleOnClick("11:30-1:30")}
@@ -190,8 +211,8 @@ const TimeFilter = ({state}) => {
             id: 'age-simple',
           }}
         >
-          <MenuItem value={10}>Lunch 11:30AM-1:30PM</MenuItem>
-          <MenuItem value={20}>Dinner 5:30PM-7:30PM</MenuItem>
+          <MenuItem value={"lunch"}>Lunch 11:30AM-1:30PM</MenuItem>
+          <MenuItem value={"dinner"}>Dinner 5:30PM-7:30PM</MenuItem>
           
         </Select>
       </FormControl>
@@ -229,9 +250,9 @@ const AmbienceFilter = ({setVibe}) => {
           }}
         >
           <MenuItem value={"happy_hour"}>Happy Hour</MenuItem>
-          <MenuItem value={20}>Good for clients</MenuItem>
-          <MenuItem value={20}>Family Friendly</MenuItem>
-          <MenuItem value={20}>Internal team bonding</MenuItem>
+          <MenuItem value={"good_for_clients"}>Good for clients</MenuItem>
+          <MenuItem value={"family_friendly"}>Family Friendly</MenuItem>
+          <MenuItem value={"team_bonding"}>Internal team bonding</MenuItem>
           
         </Select>
       </FormControl>
@@ -239,7 +260,7 @@ const AmbienceFilter = ({setVibe}) => {
       )
 }
  
-const DateFilter = ({filterOnOff, setFilterOnOff}) => {
+const DateFilter = ({}) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     age: '',
@@ -284,28 +305,80 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
     const classes = useStyles();
     const filteredRestaurants = restaurants.filter((r) => {
       let filter_or_not = false;
-      if ((budget === "" && vibe === "") || (parseFloat(r.price) <= parseFloat(budget)))
+      //budget
+      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (parseFloat(r.price) <= parseFloat(budget)))
       {
         filter_or_not = true;
       }
-      const restaurantVibes = [r.happy_hour, r.good_for_clients, r.family_friendly, r.team_bonding];
-      // if ((vibe === "") || (restaurantVibes.map(r => r === vibe).reduce((a,v) => a || v)))
-      // {
-      //   filter_or_not = true;
-      // }
-      if ((vibe === "" && budget === "") || (r.vibes.includes(vibe)))
+      
+      //vibe
+      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (r.vibes.includes(vibe)))
       {
-        console.log("vibe: " + vibe)
         filter_or_not = true;
       }
+      
+      //size of party
+      //small - 1-5
+      //medium - 6-10
+      //large - 10+
+      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (r.party_size.includes(numPeople)))
+      {
+        filter_or_not = true;
+      }
+
+      //time (lunch vs dinner)
+      //11:30-1:30 - lunch
+      //5:30-7:30 - dinner
+      const isLunch = () => {
+        if ((parseFloat(r.start) <= 1130) && (parseFloat(r.end) >= 1330))
+        {
+          return true;
+        }
+        return false;
+      }
+      
+      const isDinner = () => {
+        if ((parseFloat(r.start) <= 1730) && (parseFloat(r.end) >= 1930))
+        {
+          return true;
+        }
+        return false;        
+      }
+      
+      let restaurantTime = "neither";
+      if (isLunch())
+      {
+        if (isDinner())
+        {
+          restaurantTime = "both";
+        }
+        restaurantTime = "lunch";
+      }
+      if (isDinner())
+      {
+        if (!isLunch())
+        {
+          restaurantTime = "dinner";
+        }
+        restaurantTime = "both";
+      }
+      //console.log(restaurantTime);
+
+      if((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (selectedTime === restaurantTime) || (restaurantTime === "both"))
+      {
+        filter_or_not = true;
+      }
+
       return filter_or_not;
     }); // this will re-render because of the changes in filter attributes which are states (time, etc)
   
     return(
         <React.Fragment>
-          <AppBar_header numPeople={numPeople} setNumPeople={setNumPeople} 
+          <AppBar_header  numPeople={numPeople} 
+                          setNumPeople={setNumPeople} 
                           setBudget={setBudget}
-                          setVibe={setVibe} />
+                          setVibe={setVibe}
+                          setTime={setSelectedTime} />
           <div className='list'>
             <Container>
             <Grid container spacing={10}>

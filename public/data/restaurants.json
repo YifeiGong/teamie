@@ -1,21 +1,25 @@
-{
+{ 
   "restaurants": [
     {
       "id": "1",
       "name": "Koco Table",
       "type": "Korean",
       "price": 14,
-      "hours": "11:00-21:00",
+      "start": "1100",
+      "end": "1350",
       "tables": [2, 4, 6, 10],
+      "party_size": ["small", "medium", "large"],
       "vibes": ["happy_hour", "good_for_clients", "family_friendly", "team_bonding"]
     },
-    {
+    { 
       "id": "2",
       "name": "Shinsen Evanston",
       "type": "Japanese",
       "price": 20,
-      "hours": "10:00-19:00",
+      "start": "900",
+      "end": "2200",
       "tables": [2, 4, 6, 10],
+      "party_size": ["small", "medium"],
       "vibes": ["happy_hour", "family_friendly", "team_bonding"]
     }, 
     {
@@ -23,8 +27,10 @@
       "name": "Josh’s Hot Dogs",
       "type": "Hot Dogs",
       "price": 10,
-      "hours": "17:00-21:00",
+      "start": "800",
+      "end": "2300",
       "tables": [2, 4, 6, 10],
+      "party_size": ["medium", "large"],
       "vibes": ["family_friendly", "team_bonding"]
     },
     {
@@ -32,8 +38,10 @@
       "name": "Koi",
       "type": "Japanese",
       "price": 20,
-      "hours":"11:00-21:00", 
+      "start": "1100",
+      "end": "2100",
       "tables": [2, 4, 6, 10],
+      "party_size": ["small", "medium", "large"],
       "vibes": ["good_for_clients", "family_friendly", "team_bonding"]
     },
     {
@@ -41,8 +49,10 @@
       "name": "Shang's Noodles",
       "type": "Chinese",
       "price": 13,
-      "hours": "10:00-21:00",
+      "start": "1100",
+      "end": "2100",
       "tables": [2, 4, 6, 10],
+      "party_size": ["small", "large"],
       "vibes": ["good_for_clients", "family_friendly", "team_bonding"]
     },
     {
@@ -50,8 +60,10 @@
       "name": "Vinny’s Pizza & Pasta",
       "type": "Pizza",
       "price": 23,
-      "hours":"12:00-21:00",
+      "start": "1500",
+      "end": "2000",
       "tables": [2, 4, 6, 10],
+      "party_size": ["small", "medium"],
       "vibes": ["family_friendly", "team_bonding"]
 
     },
@@ -60,8 +72,10 @@
       "name": "Joy Yee's",
       "type": "Chinese",
       "price": 12,
-      "hours": "11:30-22:00",
+      "start": "1030",
+      "end": "2200",
       "tables": [2, 4, 6, 10],
+      "party_size": ["large"],
       "vibes": ["happy_hour", "family_friendly"]
     },
     {
@@ -69,8 +83,10 @@
       "name": "Olive Mediterranean Grill",
       "type": "Mediterranean",
       "price": 13,
-      "hours": "10:30-21:00",
+      "start": "1200",
+      "end": "2300",
       "tables": [2, 4, 6, 10],
+      "party_size": ["medium", "large"],
       "vibes": ["team_bonding"]
     }
   ]
