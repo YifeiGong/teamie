@@ -19,6 +19,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const db = firebase.database().ref();
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -43,14 +45,13 @@ const App = ({}) => {
   const url = '/data/restaurants.json';
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
-      const response = await fetch(url);
-      if (!response.ok) throw response;
-      const json = await response.json();
-      setRestaurants(json);
+    const handleData = snap => {
+      if (snap.val()) setRestaurants(snap.val());
     }
-    fetchRestaurants();
-    // fetchFilteredRestaurants();
+    db.on('value', handleData, error => alert(error));
+    return () => {
+      db.off('value', handleData);
+    };
   }, []);
   
   const classes = useStyles();
