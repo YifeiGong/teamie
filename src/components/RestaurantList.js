@@ -305,70 +305,47 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
     const classes = useStyles();
     const filteredRestaurants = restaurants.filter((r) => {
       let filter_or_not = false;
-      //budget
-      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (parseFloat(r.price) <= parseFloat(budget)))
-      {
-        filter_or_not = true;
+      let filterStatus = []
+      // Vibe
+      if (vibe === "" || r.vibes.includes(vibe)) {
+        filterStatus.push(true);
       }
-      
-      //vibe
-      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (r.vibes.includes(vibe)))
-      {
-        filter_or_not = true;
+      else {
+        filterStatus.push(false);
       }
-      
-      //size of party
-      //small - 1-5
-      //medium - 6-10
-      //large - 10+
-      if ((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (r.party_size.includes(numPeople)))
-      {
-        filter_or_not = true;
+      // Party Size
+      if (numPeople === "" || (r.party_size.includes(numPeople))) {
+        filterStatus.push(true);
       }
-
-      //time (lunch vs dinner)
-      //11:30-1:30 - lunch
-      //5:30-7:30 - dinner
-      const isLunch = () => {
-        if ((parseFloat(r.start) <= 1130) && (parseFloat(r.end) >= 1330))
-        {
-          return true;
-        }
-        return false;
+      else {
+        filterStatus.push(false);
       }
-      
-      const isDinner = () => {
-        if ((parseFloat(r.start) <= 1730) && (parseFloat(r.end) >= 1930))
-        {
-          return true;
-        }
-        return false;        
+      // Budget
+      if (budget === "" || (parseFloat(r.price) <= parseFloat(budget))) {
+        filterStatus.push(true);
       }
-      
-      let restaurantTime = "neither";
-      if (isLunch())
-      {
-        if (isDinner())
-        {
-          restaurantTime = "both";
-        }
-        restaurantTime = "lunch";
+      else {  
+        filterStatus.push(false);
       }
-      if (isDinner())
-      {
-        if (!isLunch())
-        {
-          restaurantTime = "dinner";
-        }
-        restaurantTime = "both";
+      // Time
+      let selectedStart;
+      let selectedEnd;
+      if (selectedTime === "lunch") {
+        selectedStart = 1130;
+        selectedEnd = 1330;
       }
-      //console.log(restaurantTime);
-
-      if((numPeople === "" && budget === "" && vibe === "" && selectedTime === "") || (selectedTime === restaurantTime) || (restaurantTime === "both"))
-      {
-        filter_or_not = true;
+      else if (selectedTime === "dinner") {
+        selectedStart = 1730;
+        selectedEnd = 1930;
+      }
+      if (selectedTime === "" || (selectedStart >= r.start && selectedEnd <= r.end)) {
+        filterStatus.push(true);
+      }
+      else {
+        filterStatus.push(false);
       }
 
+      filter_or_not = filterStatus.every(val => val);
       return filter_or_not;
     }); // this will re-render because of the changes in filter attributes which are states (time, etc)
   
