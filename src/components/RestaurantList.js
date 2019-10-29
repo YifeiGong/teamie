@@ -166,13 +166,7 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) 
 
             <Grid item xs={2.5}>
               <TimeFilter setTime={setTime}></TimeFilter>
-          </Grid> 
-          <Grid item xs={1}>
-          <Typography variant="h6" className={classes.title}>
-          <Button color="inherit">Login</Button>
-          </Typography>
-          
-          </Grid>
+            </Grid> 
           </Grid>
           </Toolbar>
         </Container>
@@ -226,7 +220,7 @@ const BudgetFilter = ({setBudget}) => {
     return(       
         <form class="filter">
         <TextField id="standard-with-placeholder"
-        label="Our budegt is "
+        label="Our budget is "
         placeholder="$ average"
         className={classes.textField}
         margin="normal"
