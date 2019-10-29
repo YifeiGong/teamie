@@ -12,6 +12,7 @@ const route = (
         <div>
             <Route path="/voting/:id" component={VotingApp} />
             <Route exact path="/" component={App} />
+            <Route exact path="/hello" component={App} />
         </div>   
     </Router>
 );
