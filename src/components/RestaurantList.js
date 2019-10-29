@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import imgURL from '../images/rest1.jpg';
 import '../App.css';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -36,18 +35,19 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing(2),
+    margin: 6,
     minWidth: 200,
 
   },
-
+  textField:{
+    margin: 6,
+    minWidth: 180,
+  },
   title: {
+    padding:20,
     flexGrow: 1,
   },
-    gridList: {
-    width: "100%",
-  },
-  card:{
+  card: {
     margin: 20,
   },
   paper: {
@@ -85,23 +85,23 @@ const useStyles = makeStyles(theme => ({
         
         {
               selectedRestaurants.map( (r) => 
-              <Card className={classes.card}>
-               {r.name}
-               {r.type}
-                
-                <Chip label="Delete" clickable 
+              <div className="poll-card">
+              
+               {r.name}  
+               
+                <Chip color="primary" label="Delete" clickable 
                // color={btnColor} 
                 onClick={handleRemove}
                 />
 
-              </Card>
+              </div>
               )
             }
             
          
    
   
-    <Button variant="contained" color="primary" onClick={handleClickOpen}>
+    <Button variant="contained" color="secondary" onClick={handleClickOpen}>
         Invite People
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -138,22 +138,25 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) 
       <AppBar position="fixed" color="inherit">
       <Container>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          
+         
+       
+       
+       
+        <Grid container>
+        <Grid item xs={1}>
+        <Typography variant="h6" className={classes.title}>
             Teamie
           </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-        </Container>
-        <Container>
-        <Toolbar>
-        <Grid container>
-        <Grid item xs={3}>
+
+        </Grid>
+        <Grid item xs={2.5}>
         <AmbienceFilter setVibe={setVibe}></AmbienceFilter>
         </Grid>
-<Grid item xs={3}>
+<Grid item xs={2.5}>
         <TeamMemberFilter setNumPeople={setNumPeople}></TeamMemberFilter>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2.5}>
             <BudgetFilter setBudget={setBudget}></BudgetFilter>
             </Grid> 
             
@@ -161,10 +164,15 @@ const AppBar_header =  ({numPeople, setNumPeople, setBudget, setVibe, setTime}) 
              <DateFilter></DateFilter> 
           </Grid> */}
 
-            <Grid item xs={3}>
+            <Grid item xs={2.5}>
               <TimeFilter setTime={setTime}></TimeFilter>
           </Grid> 
+          <Grid item xs={1}>
+          <Typography variant="h6" className={classes.title}>
+          <Button color="inherit">Login</Button>
+          </Typography>
           
+          </Grid>
           </Grid>
           </Toolbar>
         </Container>
@@ -407,7 +415,7 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
                           setTime={setSelectedTime} />
           <div className='list'>
             <Container>
-            <Grid container spacing={10}>
+            <Grid container spacing={6}>
                 
 
                 {/* <Grid item xs={4}>
@@ -418,14 +426,14 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
                     <Button variant="contained" color="primary">Send out Poll</Button>
                 </Grid> */}
 <Grid item xs={1}></Grid>
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                     {filteredRestaurants.map(r => <Restaurant key={r.id} 
                                         restaurant={r}
                                         selectedRestaurants={selectedRestaurants}
                                         setSelectedRestaurants={setSelectedRestaurants}
                                         />)}
                 </Grid>
-
+               
                 <Grid item xs={4}>
                 <Paper className={classes.paper}>
 
@@ -434,6 +442,7 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
 
 </Paper>
                 </Grid>
+                <Grid item xs={1}></Grid>
             </Grid>
             </Container>
           </div>
