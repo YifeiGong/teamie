@@ -105,7 +105,7 @@ const useStyles = makeStyles(theme => ({
         Invite People
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Invitate People To Vote</DialogTitle>
+        <DialogTitle id="form-dialog-title">Invite People To Vote</DialogTitle>
         <DialogContent>
           <DialogContentText>
             xxxxx
