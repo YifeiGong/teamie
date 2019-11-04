@@ -73,9 +73,12 @@ const useStyles = makeStyles(theme => ({
       setOpen(false);
     };
     const classes = useStyles();
+    const urlCode = selectedRestaurants.map(r => r.id).toString();
+    const urlToRedirect = "/voting/" + urlCode;
+    const fullURL = "https://teamie-app.firebase.com" + urlToRedirect;
     const handleClick = () => {
-      const urlCode = selectedRestaurants.map(r => r.id).toString();
-      window.location.href = "/voting/" + urlCode;
+      document.execCommand("copy");
+      alert("Copied " + fullURL + " to clipboard!");
     }
     const handleRemove = (selectedRestaurants) => {}
     
@@ -102,28 +105,21 @@ const useStyles = makeStyles(theme => ({
    
   
     <Button variant="contained" color="secondary" onClick={handleClickOpen}>
-        Invite People
+        Generate Poll Link
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Invite People To Vote</DialogTitle>
+        <DialogTitle id="form-dialog-title">Generated Poll Link</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            xxxxx
+          <DialogContentText focused="true" id="hurl">
+            {fullURL}
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Close 
           </Button>
-          <Button onClick={handleClick} variant="contained" color="primary">Send out Poll</Button>
+          <Button onClick={handleClick} variant="contained" color="primary">Copy to Clipboard</Button>
         </DialogActions>
       </Dialog>
    </div>     
