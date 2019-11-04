@@ -17,6 +17,7 @@ const Restaurant = ({key, restaurant, selectedRestaurants, setSelectedRestaurant
     const [btnColor, setBtnColor] = useState("default");
   
     const handleClick = () => {
+      console.log("adding to list!")
       const btnToggleState = !btnToggle;
       if (btnToggle) {
         setBtnColor("default");

@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
   }));
 
-  const Poll = ({selectedRestaurants}) => {
+  const Poll = ({selectedRestaurants, setSelectedRestaurants}) => {
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
       setOpen(true);
@@ -80,7 +80,11 @@ const useStyles = makeStyles(theme => ({
       document.execCommand("copy");
       alert("Copied " + fullURL + " to clipboard!");
     }
-    const handleRemove = (selectedRestaurants) => {}
+    const handleRemove = (restaurantName) => {
+      console.log("removing")
+      const newSelectedRestaurants = selectedRestaurants.filter(r => r.name !== restaurantName);
+      setSelectedRestaurants(newSelectedRestaurants);
+    }
     
     return(
       <div>
@@ -92,9 +96,9 @@ const useStyles = makeStyles(theme => ({
               
                {r.name}  
                
-                <Chip color="primary" label="Delete" clickable 
+                <Chip className="delete-btn" color="primary" label="Delete" clickable 
                // color={btnColor} 
-                onClick={handleRemove}
+                onClick={() => handleRemove(r.name)}
                 />
 
               </div>
@@ -191,7 +195,7 @@ const TeamMemberFilter = ({setNumPeople}) => {
   return (
     <form className={classes.root} autoComplete="off">
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-simple">We have</InputLabel>
+        <InputLabel htmlFor="age-simple">Our party size is...</InputLabel>
         <Select
           value={values.age}
           onChange={handleChange}
@@ -216,7 +220,7 @@ const BudgetFilter = ({setBudget}) => {
     return(       
         <form class="filter">
         <TextField id="standard-with-placeholder"
-        label="Our budget is "
+        label="Our budget is..."
         placeholder="$ average"
         className={classes.textField}
         margin="normal"
@@ -249,7 +253,7 @@ const TimeFilter = ({setTime}) => {
     return(
       <form className={classes.root} autoComplete="off">
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-simple">During</InputLabel>
+        <InputLabel htmlFor="age-simple">Our time preference is...</InputLabel>
         <Select
           value={values.age}
           onChange={handleChange}
@@ -287,7 +291,7 @@ const AmbienceFilter = ({setVibe}) => {
   return (
     <form className={classes.root} autoComplete="off">
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-simple">The vibe we want</InputLabel>
+        <InputLabel htmlFor="age-simple">The vibe we want is...</InputLabel>
         <Select
           value={values.age}
           onChange={handleChange}
@@ -428,7 +432,7 @@ const RestaurantList = ({restaurants, selectedRestaurants, setSelectedRestaurant
                 <Paper className={classes.paper}>
 
           
-<Poll selectedRestaurants={selectedRestaurants}></Poll>
+<Poll selectedRestaurants={selectedRestaurants} setSelectedRestaurants={setSelectedRestaurants}></Poll>
 
 </Paper>
                 </Grid>

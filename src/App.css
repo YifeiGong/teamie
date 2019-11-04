@@ -6,6 +6,11 @@
   padding: 20px;
 }
 
+.delete-btn {
+  float: right;
+  padding-bottom: 10px;
+}
+
 .restaurant-card {
   width:100%;
   background: #FFF;
