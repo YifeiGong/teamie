@@ -204,9 +204,9 @@ const TeamMemberFilter = ({setNumPeople}) => {
             id: 'age-simple',
           }}
         >
-          <MenuItem value={"small"}>Small 4~6</MenuItem>
-          <MenuItem value={"medium"}>Medium</MenuItem>
-          <MenuItem value={"large"}>Large</MenuItem>
+          <MenuItem value={"small"}>Small 2~4</MenuItem>
+          <MenuItem value={"medium"}>Medium 5~10</MenuItem>
+          <MenuItem value={"large"}>Large 10+</MenuItem>
          
           
         </Select>
