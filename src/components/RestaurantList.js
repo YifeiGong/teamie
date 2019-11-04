@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     const classes = useStyles();
     const urlCode = selectedRestaurants.map(r => r.id).toString();
     const urlToRedirect = "/voting/" + urlCode;
-    const fullURL = "https://teamie-blue.firebase.com" + urlToRedirect;
+    const fullURL = "https://teamie-blue.firebaseapp.com" + urlToRedirect;
     const handleClick = () => {
       document.execCommand("copy");
       alert("Copied " + fullURL + " to clipboard!");
