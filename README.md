@@ -1,3 +1,6 @@
+## Go to https://github.com/397-F19/teamie-react-native for latest React Native version.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
