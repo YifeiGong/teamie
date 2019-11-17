@@ -55,7 +55,7 @@ const Restaurant = ({key, restaurant, selectedRestaurants, setSelectedRestaurant
     <img src= {`../images/${restaurant.id}.jpg`} alt = {restaurant.name}/>
 
 
-  <Chip className={classes.chip} label="Add to list" clickable color={btnColor} onClick={handleClick}/>
+  <Chip className={classes.chip} label="Add to list" clickable color={btnColor} onClick={handleClick} data-testid="addToList"/>
   </Grid>
   
   </Grid>

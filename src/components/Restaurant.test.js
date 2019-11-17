@@ -15,8 +15,9 @@ const restaurant = [{
             party_size: ["small", "medium"],
             vibes: ["happy_hour", "family_friendly", "team_bonding"]}];
             
-            let selectedRestaurants = [];
-            let setSelectedRestaurants = jest.fn();        
+let selectedRestaurants = jest.fn();  
+let setSelectedRestaurants = jest.fn();  
+
 describe('restaurant', () => {
   it('display card', () => {
     const {getByTestId} = render(
@@ -28,6 +29,18 @@ describe('restaurant', () => {
 
     const elem = getByTestId('restaurant2');
     expect(elem.innerHTML).toBe('Shinsen Evanston');
+  })
+
+  it('add to list', () => {
+    const {getByTestId} = render(
+    <Restaurant 
+        //key={key} 
+        restaurant={restaurant}
+        selectedRestaurants={selectedRestaurants}
+        setSelectedRestaurants={setSelectedRestaurants}/>);
+    fireEvent.click(getByTestId('addToList'));
+    expect(setSelectedRestaurants).toHaveBeenCalledTimes(1);
+    
   })
 
 
