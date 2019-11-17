@@ -37,16 +37,18 @@ const Restaurant = ({key, restaurant, selectedRestaurants, setSelectedRestaurant
        <Grid container spacing={10}>
         <Grid item xs={8}>
         <type>{restaurant.type}</type>
-     <h2>{restaurant.name}</h2>
-       
-     <h5>Average ${restaurant.price}
+        <h2 data-testid={"restaurant" + restaurant.id}>{restaurant.name}</h2>
+       <h5>Average ${restaurant.price}
      <br></br>Open Hours{restaurant.start} ~{restaurant.end} 
-     <br></br>
-     Available Table Sizes: {restaurant.tables.map(size => <span>{size}, </span>)}</h5>
+     
+     
+     {/*Available Table Sizes: {restaurant.tables.map(size => <span>{size}, </span>)}</h5>
     
-     {/*<vegan>Vegan</vegan>
+     <vegan>Vegan</vegan>
      <gltfree>Gluton Free</gltfree> */}
-    </Grid>
+     </h5>
+
+  </Grid>
     
     <Grid item xs={4}>
 
