@@ -37,7 +37,7 @@ const Restaurant = ({key, restaurant, selectedRestaurants, setSelectedRestaurant
        <Grid container spacing={10}>
         <Grid item xs={8}>
         <type>{restaurant.type}</type>
-        <h2 data-testid={"restaurant" + restaurant.id}>{restaurant.name}</h2>
+        <h2 data-cy="restaurant" data-testid={"restaurant" + restaurant.id}>{restaurant.name}</h2>
        <h5>Average ${restaurant.price}
      <br></br>Open Hours{restaurant.start} ~{restaurant.end} 
      
